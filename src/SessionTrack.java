@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class SessionTrack
- */
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 @WebServlet("/st")
 public class SessionTrack extends HttpServlet {
+	private final static Logger logger = LoggerFactory.getLogger(SessionTrack.class);
 
 	private static final long serialVersionUID = 1L;
 
@@ -52,6 +54,13 @@ public class SessionTrack extends HttpServlet {
 		}
 		// 6. 记录用户访问次数
 		session.setAttribute(VISIT_CT_KEY, visitCount);
+
+		logger.debug("Session ID:[ " + sessionID + " ]");
+		logger.debug("Session 创建时间:[ " + createTime + " ]");
+		logger.debug("Session 上次访问时间:[ " + lastAccessTime + " ]");
+
+		logger.debug("用户 ID:[ " + userIDValue + " ]");
+		logger.debug("用户登陆次数 ID:[ " + visitCount + " ]");
 
 		// Set response content type
 		response.setContentType("text/html");
